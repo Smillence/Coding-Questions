@@ -1,0 +1,32 @@
+9.4
+If you have a 2 GB file with one string per line, which sorting algorithm 
+would you use to sort the file and why?
+
+Algorithm:
+How much memory do we have available? Let’s assume we have X MB of memory available.
+1. Divide the file into K chunks, where X * K = 2 GB. Bring each chunk into memory and 
+sort the lines as usual using any O(n log n) algorithm. Save the lines back to the file.
+2. Now bring the next chunk into memory and sort.
+3. Once we’re done, merge them one by one.
+
+The above algorithm is also known as external sort. Step 3 is known as N-way merge
+The rationale behind using external sort is the size of data. Since the data is too huge 
+and we can’t bring it all into memory, we need to go for a disk based sorting algorithm.
+
+One example of external sorting is the external merge sort algorithm, which sorts chunks 
+that each fit in RAM, then merges the sorted chunks together.[1][2] For example, for 
+sorting 900 megabytes of data using only 100 megabytes of RAM:
+1. Read 100 MB of the data in main memory and sort by some conventional method, like quicksort.
+2. Write the sorted data to disk.
+3. Repeat steps 1 and 2 until all of the data is in sorted 100 MB chunks (there are 900MB / 100MB 
+	= 9 chunks), which now need to be merged into one single output file.
+4. Read the first 10 MB (= 100MB / (9 chunks + 1)) of each sorted chunk into input buffers in 
+main memory and allocate the remaining 10 MB for an output buffer. (In practice, it might provide
+ better performance to make the output buffer larger and the input buffers slightly smaller.)
+5. Perform a 9-way merge and store the result in the output buffer. Whenever the output buffer 
+fills, write it to the final sorted file and empty it. Whenever any of the 9 input buffers 
+empties, fill it with the next 10 MB of its associated 100 MB sorted chunk until no more data 
+from the chunk is available. This is the key step that makes external merge sort work externally 
+-- because the merge algorithm only makes one pass sequentially through each of the chunks, each 
+chunk does not have to be loaded completely; rather, sequential parts of the chunk can be loaded 
+as needed.
