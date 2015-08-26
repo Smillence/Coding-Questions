@@ -1,0 +1,51 @@
+1) List
+	sorted(lst)
+	lst.sort()
+	lst.append(e)
+	lst.pop([i]) # i is optional; cannot pop from an empty list
+	lst.extend(L) # equals to a[len(a):] = L
+	lst.insert(i,e) # check what the result is when abs(i) > e
+	lst.index(e) # find the first appearance of e
+	lst.count(e)
+	lst.remove(e) # remove the first appearance of e
+	del lst[i]
+	del lst[i:j]
+	del lst[:]
+2) String
+	# See: https://docs.python.org/2/library/stdtypes.html#string-methods
+	print r'C:\some\name' # use raw string
+	print 'hi\
+	yourself'
+	a = 'Py' 'thon'
+	print a[2:100] # out of range slice indexes are handled gracefully
+	print ''.join(['h','i'])
+	print ord('a')
+	print '1 2'.split()
+   
+ 4) if __name__ == '__main__':
+ 5) 
+ 6) for i in range(len(lst)-1,-1,-1):
+ 7) {char:[] for char in Set}
+ 8) min(lst, key=foo)
+ 9) min(result_l,result_r,key=lambda x:x[0])
+ 10) lst = [[k,v] for k,v in dic.items()]
+ 11) lst = filter(lambda item: item != '', lst)
+12) lst = map(lambda x:int(x),lst)
+13) from collections import defaultdict
+    dic = defaultdict(int)
+14) import re
+    pattern = re.compile(r'\s+')
+ 	  string = re.sub(pattern, '', string)
+15) import sys
+try:
+    txt = open(sys.argv[1],"rt")
+    line = txt.readline()
+except:
+    print "File does not exist!"
+    sys.exit()
+# 16) import string
+#     digs = string.digits + string.letters
+# 17) from collections import deque
+	  queue = deque([1,2,3])
+	  queue.append(4)
+	  queue.popleft() # FIFO
