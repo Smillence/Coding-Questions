@@ -49,3 +49,7 @@ except:
 	  queue = deque([1,2,3])
 	  queue.append(4)
 	  queue.popleft() # FIFO
+
+
+common mistake:
+1. use dot "." to access class member, not "->"
