@@ -1,0 +1,2 @@
+1. use dot "." to access class member, not "->"
+2. be careful with '/' operator if you want to get float result
