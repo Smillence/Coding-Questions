@@ -19,7 +19,6 @@ class Node:
 
 
 def reverseNodeList(node,previous):
-    
     if node.next == None:  
         node.next = previous
         return node
@@ -28,7 +27,13 @@ def reverseNodeList(node,previous):
         node.next = previous
         return reverseNodeList(old_next,node)
     
-    
+def reverseNodeListNonRecursive(node):
+    if not node:
+        return None
+    rest, node.next = node.next, None
+    while rest:
+        rest.next, node, rest = node, rest, rest.next
+    return node  
 
 if __name__ == '__main__':
     # 6 > 8 > 2> 4
@@ -36,7 +41,8 @@ if __name__ == '__main__':
     node2 = Node(2,node1)
     node3 = Node(8,node2)
     node4 = Node(6,node3)
-    node = reverseNodeList(node4,None)
+    #node = reverseNodeList(node4,None)
+    node = reverseNodeListNonRecursive(node4)
     while True:
         print node.data
         if node.next==None:break
