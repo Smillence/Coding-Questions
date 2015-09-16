@@ -5,8 +5,10 @@ What if you can not use additional data structures?
 
 '''Algorithm Design
 Confusions:
-1. What do you mean by "all unique characters"? I assume it is ACSII string with value 0~255.
-2. What do you mean by "cannot use addtional data structures"? I assume I can only use string.
+1. What do you mean by "all unique characters"? I assume it is ACSII string with
+ value 0~255.
+2. What do you mean by "cannot use addtional data structures"? I assume I can 
+only use string.
 Examples:
 1) agshdhfkd -> False
 2) agsdhfk -> True

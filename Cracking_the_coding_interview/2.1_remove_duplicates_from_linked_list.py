@@ -6,11 +6,19 @@ How would you solve this problem if a temporary buffer is not allowed?
 # clarification questions:
 # 1) what's the return value (assume no return value)
 # 2) the input is the head node.
-
+# 3) will there be any circles in the linked list?
 class Node:
     def __init__(self,data,next):
         self.data = data
         self.next = next
+
+# given a sequence, generate a corredpoding linked list with no circles
+def NodeGenerator(seq):
+    dummy = cur = Node(None,None)
+    for item in seq:
+        cur.next = Node(item,None)
+        cur = cur.next
+    return dummy.next
 
 # solution 1: if can use a buffer, store key in a dictionary
 def removeDuplicate_hash(node):
@@ -18,7 +26,6 @@ def removeDuplicate_hash(node):
 		return
 
 	hash_table = [node.data]
-
     
   	pre = node
 	cur = node
@@ -55,13 +62,20 @@ def removeDuplicate(node):
             
     if node.next != None:        
         removeDuplicate(node.next)
+
+
+''' BELOW ARE UNIT TESTS '''
+
+def test(func):
+    node = NodeGenerator([4,8,2,4])
+    removeDuplicate(node)
+    while True:
+        if node.next==None:break
+        node = node.next 
       
 if __name__ == '__main__':
     print '\nTest case 1: 4 -> 8 -> 2-> 4'
-    node4 = Node(4,None)
-    node3 = Node(2,node4)
-    node2 = Node(8,node3)
-    node1 = Node(4,node2)
+    node1 = NodeGenerator([4,8,2,4])
     removeDuplicate(node1)
     while True:
         print node1.data
@@ -98,8 +112,7 @@ if __name__ == '__main__':
     while True:
         print node1.data
         if node1.next==None:break
-        node1 = node1.next 
-        
+        node1 = node1.next        
         
     print '\nTest case 6: 4 -> 2 -> 3-> 4 -> 8 -> 6 -> 6 -> 2'
     node8 = Node(2,None)
@@ -114,11 +127,5 @@ if __name__ == '__main__':
     while True:
         print node1.data
         if node1.next==None:break
-        node1 = node1.next 
-    
-    
-    
-    
-    
-    
-    
+        node1 = node1.next
+        
