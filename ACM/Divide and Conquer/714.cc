@@ -5,14 +5,13 @@ each scriber get a continuous sequence of books
 
 Goal: minimize the maximum number of pages assigned to a single scriber
 
-Teset cases:
-1. k==1
 */
 
 #include <iostream>
 #include <algorithm>
 #include <vector>
 #include <fstream>
+
 #include <cstring>
 
 
@@ -21,23 +20,26 @@ using namespace std;
 typedef long long ll;
 typedef vector<ll> vi;
 
-vi pos;// the position of the slashes to divide the books to k parts
+//vi pos;// the position of the slashes to divide the books to k parts
 
 bool cover(ll range, ll k, vi* p) {
-	pos.clear();
+	//pos.clear();
+	ll count = 0;
 	ll cum = 0;
 	for (ll i=(*p).size()-1; i>=0; --i) {
 		if (cum > range) {
-			pos.push_back(i+1); // slash after the book i+1
+			++count;
+			//pos.push_back(i+1); // slash after the book i+1
 			cum = (*p)[++i]; // reset
 		} else {
 			cum += (*p)[i];
 		}
 	}
 	if (cum > range) {
-		pos.push_back(0); 
+		//pos.push_back(0); 
+		++count;
 	}
-	if (pos.size() <= k-1) {
+	if (count <= k-1) {
 		return true;
 	} else {
 		return false;
@@ -73,14 +75,16 @@ void print(ll high_bound, vi* p, ll n, ll m)
 }
 
 int main() {
+
+	// Unit tests:
+
 	// ifstream in("in.txt");
- //  streambuf *cinbuf = std::cin.rdbuf(); //save old buf
- //  cin.rdbuf(in.rdbuf()); //redirect std::cin to in.txt!
+	// streambuf *cinbuf = std::cin.rdbuf(); //save old buf
+	// cin.rdbuf(in.rdbuf()); //redirect std::cin to in.txt!
 
- //  ofstream out("out.txt");
- //  streambuf *coutbuf = std::cout.rdbuf(); //save old buf
- //  cout.rdbuf(out.rdbuf()); //redirect std::cout to out.txt!
-
+	// ofstream out("out.txt");
+	// streambuf *coutbuf = std::cout.rdbuf(); //save old buf
+	// cout.rdbuf(out.rdbuf()); //redirect std::cout to out.txt!
 
 	ll N, m, k;
 	cin >> N; // number of test cases;
@@ -112,19 +116,19 @@ int main() {
 		cover(low_bound, k, &p);
 
 		// Step 2: Satisfy that each scriber must be assigned at least one book
-		reverse(pos.begin(),pos.end()); 
-		ll rest = (k-1 - pos.size());
-		ll start = 0;
-		for (vi::iterator it=pos.begin(); it!=pos.end(); ++it) {
-			for (ll i = start; rest > 0 && i<*it; i++, --rest) {
-				pos.push_back(i);
-			}
-			if (rest == 0) {
-				break;
-			}
-			start = *it + 1;
-		}
-		sort(pos.begin(), pos.end());
+		// reverse(pos.begin(),pos.end()); 
+		// ll rest = (k-1 - pos.size());
+		// ll start = 0;
+		// for (vi::iterator it=pos.begin(); it!=pos.end(); ++it) {
+		// 	for (ll i = start; rest > 0 && i<*it; i++, --rest) {
+		// 		pos.push_back(i);
+		// 	}
+		// 	if (rest == 0) {
+		// 		break;
+		// 	}
+		// 	start = *it + 1;
+		// }
+		// sort(pos.begin(), pos.end());
 
 		//Step 3: print the result
 		print(low_bound, &p, m, k);
