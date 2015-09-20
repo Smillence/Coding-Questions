@@ -27,9 +27,9 @@ bool cover(ll range, ll k, vi* p) {
 	pos.clear();
 	ll cum = 0;
 	for (ll i=(*p).size()-1; i>=0; --i) {
-		if (cum > range) {
+		if (cum + (*p)[i] > range) {
 			pos.push_back(i+1); // slash after the book i+1
-			cum = (*p)[++i]; // reset
+			cum = (*p)[i]; // reset
 		} else {
 			cum += (*p)[i];
 		}
