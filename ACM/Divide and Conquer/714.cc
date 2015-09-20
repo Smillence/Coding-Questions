@@ -44,32 +44,27 @@ bool cover(ll range, ll k, vi* p) {
 	}
 }
 
-void print(ll high_bound, vi* p, ll n, ll m)
-{
-		
-    int group = 1, sum = 0;
-    for(int i = n-1; i >= 0; i--)
-    {
-        if(sum + (*p)[i] > high_bound)
-        {
-            use[i] = 1;
-            sum = (*p)[i];
-            group++;
-        }
-        else sum += (*p)[i];
-        if(m-group == i+1)
-        {
-            for(int j = 0; j <= i; j++)
-                use[j] = 1;
-            break;
-        }
+void print (ll high_bound, vi* p, ll n, ll m) {
+	int group = 1, sum = 0;
+	for (int i = n-1; i >= 0; i--) {
+    if (sum + (*p)[i] > high_bound) {
+    	use[i] = 1;
+    	sum = (*p)[i];
+    	group++;
+    } else {
+    	sum += (*p)[i];
     }
-    for(int i = 0; i < n-1; i++)
-    {
-        cout << (*p)[i] << " ";
-        if(use[i]) cout << "/ ";
+    if (m-group == i+1) {
+    	for(int j = 0; j <= i; j++)
+    		use[j] = 1;
+    	break;
     }
-    cout << (*p)[n-1] << endl;
+  }
+  for (int i = 0; i < n-1; i++) {
+  	cout << (*p)[i] << " ";
+  	if(use[i]) cout << "/ ";
+  }
+  cout << (*p)[n-1] << endl;
 }
 
 int main() {
@@ -102,7 +97,7 @@ int main() {
 			high_bound += p[i];
 		}
 
-		// Step 1: bi-greedy search to find the smallest range that fits
+		// bi-greedy search to find the smallest range that fits
 		while (low_bound != high_bound) {
 			ll mid = (high_bound+low_bound) >> 1;
 			if (cover(mid, k, &p)) {
@@ -111,37 +106,10 @@ int main() {
 				low_bound = mid + 1;
 			}
 		}
-		cover(low_bound, k, &p);
 
-		//Step 2: Satisfy that each scriber must be assigned at least one book
-		reverse(pos.begin(),pos.end()); 
-		ll rest = (k-1 - pos.size());
-		ll start = 0;
-		for (vi::iterator it=pos.begin(); it!=pos.end(); ++it) {
-			for (ll i = start; rest > 0 && i<*it; i++, --rest) {
-				pos.push_back(i);
-			}
-			if (rest == 0) {
-				break;
-			}
-			start = *it + 1;
-		}
-		sort(pos.begin(), pos.end());
-
-		//Step 3: print the result
+		//print the result
 		print(low_bound, &p, m, k);
-		// start = 0;
-		// for (vi::iterator it=pos.begin(); it!=pos.end(); ++it) {
-		// 	for (ll i = start; i<=*it; i++) {
-		// 		cout << p[i] << " ";
-		// 	}
-		// 	cout << "/ ";
-		// 	start = *it + 1;
-		// }
-		// for (ll i = start; i<m-1; ++i) {
-		// 	cout << p[i] << " ";
-		// }
-		// cout << p[m-1] << endl;
+
 	}
 	return 0;
 }
