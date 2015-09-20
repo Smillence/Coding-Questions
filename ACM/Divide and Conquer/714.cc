@@ -44,9 +44,9 @@ bool cover(ll range, ll k, vi* p) {
 	}
 }
 
-void print (ll high_bound, vi* p, ll n, ll m) {
+void print (ll high_bound, vi* p, ll m, ll k) {
 	int group = 1, sum = 0;
-	for (int i = n-1; i >= 0; i--) {
+	for (int i = m-1; i >= 0; i--) {
     if (sum + (*p)[i] > high_bound) {
     	use[i] = 1;
     	sum = (*p)[i];
@@ -54,17 +54,17 @@ void print (ll high_bound, vi* p, ll n, ll m) {
     } else {
     	sum += (*p)[i];
     }
-    if (m-group == i+1) {
+    if (k-group == i+1) {
     	for(int j = 0; j <= i; j++)
     		use[j] = 1;
     	break;
     }
   }
-  for (int i = 0; i < n-1; i++) {
+  for (int i = 0; i < m-1; i++) {
   	cout << (*p)[i] << " ";
   	if(use[i]) cout << "/ ";
   }
-  cout << (*p)[n-1] << endl;
+  cout << (*p)[m-1] << endl;
 }
 
 int main() {
