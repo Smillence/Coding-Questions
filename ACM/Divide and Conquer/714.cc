@@ -20,32 +20,30 @@ using namespace std;
 typedef long long ll;
 typedef vector<ll> vi;
 
-//vi pos;// the position of the slashes to divide the books to k parts
+vi pos;// the position of the slashes to divide the books to k parts
+int use[510];
 
 bool cover(ll range, ll k, vi* p) {
-	//pos.clear();
-	ll count = 0;
+	pos.clear();
 	ll cum = 0;
 	for (ll i=(*p).size()-1; i>=0; --i) {
 		if (cum > range) {
-			++count;
-			//pos.push_back(i+1); // slash after the book i+1
+			pos.push_back(i+1); // slash after the book i+1
 			cum = (*p)[++i]; // reset
 		} else {
 			cum += (*p)[i];
 		}
 	}
 	if (cum > range) {
-		//pos.push_back(0); 
-		++count;
+		pos.push_back(0); 
 	}
-	if (count <= k-1) {
+	if (pos.size() <= k-1) {
 		return true;
 	} else {
 		return false;
 	}
 }
-int use[510];
+
 void print(ll high_bound, vi* p, ll n, ll m)
 {
 		
@@ -106,7 +104,7 @@ int main() {
 
 		// Step 1: bi-greedy search to find the smallest range that fits
 		while (low_bound != high_bound) {
-			ll mid = (high_bound+low_bound) / 2;
+			ll mid = (high_bound+low_bound) >> 1;
 			if (cover(mid, k, &p)) {
 				high_bound = mid;
 			} else {
@@ -115,20 +113,20 @@ int main() {
 		}
 		cover(low_bound, k, &p);
 
-		// Step 2: Satisfy that each scriber must be assigned at least one book
-		// reverse(pos.begin(),pos.end()); 
-		// ll rest = (k-1 - pos.size());
-		// ll start = 0;
-		// for (vi::iterator it=pos.begin(); it!=pos.end(); ++it) {
-		// 	for (ll i = start; rest > 0 && i<*it; i++, --rest) {
-		// 		pos.push_back(i);
-		// 	}
-		// 	if (rest == 0) {
-		// 		break;
-		// 	}
-		// 	start = *it + 1;
-		// }
-		// sort(pos.begin(), pos.end());
+		//Step 2: Satisfy that each scriber must be assigned at least one book
+		reverse(pos.begin(),pos.end()); 
+		ll rest = (k-1 - pos.size());
+		ll start = 0;
+		for (vi::iterator it=pos.begin(); it!=pos.end(); ++it) {
+			for (ll i = start; rest > 0 && i<*it; i++, --rest) {
+				pos.push_back(i);
+			}
+			if (rest == 0) {
+				break;
+			}
+			start = *it + 1;
+		}
+		sort(pos.begin(), pos.end());
 
 		//Step 3: print the result
 		print(low_bound, &p, m, k);
