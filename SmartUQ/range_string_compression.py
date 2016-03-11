@@ -3,6 +3,9 @@ SmartUQ Interview Question
 
 Question: given a string "3:8,5,2:    5,11:22,5,7,       4,100", compress to "2:8,11:22,100"
 
+
+[1:4],[2:6],7 --> [1:7]
+
 Limitations:
 1) cannot deal with bad input such as '1,3,2:::::::5,,::::,,'
 

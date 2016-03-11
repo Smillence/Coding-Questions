@@ -44,7 +44,6 @@ def merge(lst1,lst2):
 	else:
 		return [lst2[0]] + merge(lst2[1:],lst1)
 
-
 if __name__ == '__main__':
 	node1 = Node(4,None)
 	node2 = Node(2,node1)
@@ -55,8 +54,3 @@ if __name__ == '__main__':
 		print node.data
 		if node.next==None:break
 		node = node.next
-
-
-
-
-

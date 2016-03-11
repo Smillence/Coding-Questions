@@ -7,20 +7,25 @@ In C and C++, strings are typically represented as char arrays that have a null
 terminator. A null terminator means that the string ends with a '\0' character 
 (which has ASCII code 0)
 
-It is almost the same as revert a linked list
+It is almost the same as reverting a linked list
 
 '''
-
 
 # clarification questions:
 # 1) input is a string ending with '\0'
 # 2) i cannot use .reverse()
 
 class Node:
-    def __init__(self,data,next):
+    def __init__(self,data,successor):
         self.data = data
-        self.next = next
+        self.next = successor
 
+def reverseString(node):
+    head = Node('\0',node)
+    pre = None
+    while head != None:
+        head.next, pre, head = pre, head, head.next
+    return pre.next
 
 def reverseNodeList(node,previous):
     if node.next == None:  
@@ -52,7 +57,7 @@ if __name__ == '__main__':
     node2 = Node('c',node1)
     node3 = Node('b',node2)
     node4 = Node('a',node3)
-    node = reverseCStyleString(node4)
+    node = reverseString(node4)
     while True:
         print node.data
         if node.next==None:break
