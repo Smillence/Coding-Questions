@@ -9,6 +9,7 @@ Given a binary search tree, design an algorithm which creates a linked list of a
 # 3) input is not None? (yes)
 # 4) the linked list tail can be the leftmost, head can be the rightmost? (yes)
 
+import copy
 
 class TreeNode:
     def __init__(self,val):
@@ -22,7 +23,7 @@ class TreeNode:
         if self.left:
             ret += self.left.__str__(level+1)
         return ret
-    
+
 def createTree(arr):
     if arr == []:
         return None
@@ -40,6 +41,29 @@ class Node:
         self.data = data
         self.Next = Next
 
+def createLinkedLists_v2(root):
+    frontier = [root]
+    output = []
+    while frontier != []:
+        frontier_old = copy.deepcopy(frontier)
+
+        # convert frontier elements to a linked list
+        lst = Node(frontier.pop(0),None)
+        tail = lst
+        while frontier != []:
+            tail.Next = Node(frontier.pop(0),None)
+            tail = tail.Next
+        output.append(lst)
+        # add all children of the linked list elements to frontier
+        for treenode in frontier_old:
+            if treenode.left is not None:
+                frontier.append(treenode.left)
+            if treenode.right is not None:
+                frontier.append(treenode.right)
+    return output
+
+
+
 # algorithm: use BFS
 def createLinkedLists(root):
     frontier = [(root,1)]
@@ -54,20 +78,19 @@ def createLinkedLists(root):
             curDepth +=1
         else:
             tail = output[curDepth-1]
-            head = Node(cur[0],tail)         
+            head = Node(cur[0],tail)
             output[curDepth-1] = head
         if cur[0].left != None:
             frontier.append((cur[0].left,curDepth+1))
         if cur[0].right != None:
             frontier.append((cur[0].right,curDepth+1))
     return output
-            
-    
-import copy    
+
+
 if __name__ == '__main__':
     t = createTree([1,2,3,4,5,6])
     print t
-    lst = createLinkedLists(t)
+    lst = createLinkedLists_v2(t)
     for node in lst:
         node = copy.deepcopy(node)
         output = ''
@@ -76,7 +99,3 @@ if __name__ == '__main__':
             output += str(treeNode.data) + ' '
             node = node.Next
         print output
-
-    
-        
-    
