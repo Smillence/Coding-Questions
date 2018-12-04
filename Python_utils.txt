@@ -16,6 +16,7 @@
 	del lst[i:j]
 	del lst[:]
 2) String
+  convert int to string: str(1)
 	# See: https://docs.python.org/2/library/stdtypes.html#string-methods
 	print r'C:\some\name' # use raw string
 	print 'hi\
@@ -23,23 +24,28 @@
 	a = 'Py' 'thon'
 	print a[2:100] # out of range slice indexes are handled gracefully
 	print ''.join(['h','i'])
+	' '.join(str(x) for x in lst)
 	print ord('a')
 	print '1 2'.split()
-
- 4) if __name__ == '__main__':
- 5)
- 6) for i in range(len(lst)-1,-1,-1):
- 7) {char:[] for char in Set}
- 8) min(lst, key=foo)
- 9) min(result_l,result_r,key=lambda x:x[0])
- 10) lst = [[k,v] for k,v in dic.items()]
- 11) lst = filter(lambda item: item != '', lst)
+	'abc'[::-1] # reverse a string
+	''.join(sorted(a)) # sort a string
+	string += another_string
+4) if __name__ == '__main__':
+5)
+6) for i in range(len(lst)-1,-1,-1):
+7) {char:[] for char in Set}
+8) min(lst, key=foo)
+9) min(result_l,result_r,key=lambda x:x[0])
+10) lst = [[k,v] for k,v in dic.items()]
+11) lst = filter(lambda item: item != '', lst)
 12) lst = map(lambda x:int(x),lst)
+    value = reduce(lambda x, y : x + y, [1,2,3])
 13) from collections import defaultdict
     dic = defaultdict(int)
 14) import re
     pattern = re.compile(r'\s+')
  	  string = re.sub(pattern, '', string)
+		re.match(pattern, string)
 15) import sys
 try:
     txt = open(sys.argv[1],"rt")
@@ -47,9 +53,17 @@ try:
 except:
     print "File does not exist!"
     sys.exit()
-# 16) import string
-#     digs = string.digits + string.letters
-# 17) from collections import deque
+16) import string
+    digs = string.digits + string.letters
+17) from collections import deque
 	  queue = deque([1,2,3])
 	  queue.append(4)
 	  queue.popleft() # FIFO
+18) integer division: a // b
+19) from fractions import Fraction
+    a=Fraction(*[1,2])
+		a.denominator
+		a.numerator
+20) eval("x + 3")
+21) any(lst)
+    all(lst)

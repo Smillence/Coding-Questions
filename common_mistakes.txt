@@ -1,2 +1,7 @@
 1. use dot "." to access class member, not "->"
 2. be careful with '/' operator if you want to get float result
+3. missing return statement
+4. append element to a linked list needs to keep track of the tail or you will always
+end up with setting head.next so the list will alway be of size 2
+5. forloop does not work for linked list
+6. linked list questions usually need two variables: head and cur
