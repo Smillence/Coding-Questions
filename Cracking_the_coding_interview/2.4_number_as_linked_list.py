@@ -3,7 +3,7 @@
 
 You have two numbers represented by a linked list, where each node contains a single digit. The digits are stored in reverse order, such that the 1's digit is at the head of the list. Write a function that adds the two numbers and returns the sum as a linked list.
 
-EXAMPLE 
+EXAMPLE
 
 Input: (3 -> 1 -> 5) + (5 -> 9 -> 2)
 
@@ -26,8 +26,37 @@ class Node:
             output += str(self.data) + ' '
             if self.next==None:
                 break
-            self = self.next 
+            self = self.next
         return output
+
+def foo3(node1, node2):
+    res = Node(0, None)
+    pre = None
+    cur = res
+    node1_cur = node1
+    node2_cur = node2
+    while node1_cur is not None or node2_cur is not None:
+        pre = cur
+        if node1_cur is None:
+            cur.data += node2_cur.data
+        elif node2_cur is None:
+            cur.data += node1_cur.data
+        else:
+            cur.data += node1_cur.data + node2_cur.data
+        if cur.data >= 10:
+            cur.data -= 10
+            cur.next = Node(1, None)
+        else:
+            cur.next = Node(0, None)
+        cur = cur.next
+        if node1_cur is not None:
+            node1_cur = node1_cur.next
+        if node2_cur is not None:
+            node2_cur = node2_cur.next
+    if cur.data == 0 and pre is not None:
+        pre.next = None
+    return res
+
 
 # solution 1:
 # 1)convert two linked list to two numbers
@@ -41,7 +70,7 @@ def foo(node1,node2):
 # input: 6->8
 # output: 86
 def node2num(node):
-    
+
     output = 0
     power = 0
     while node != None:
@@ -49,16 +78,16 @@ def node2num(node):
         power += 1
         node = node.next
     return output
- 
+
 # input: 86
 # output: 6->8
 def num2node(num):
     head = None
     pre = None
     while num != 0:
-        data = num % 10        
+        data = num % 10
         node = Node(data,None)
-        
+
         if head == None:
             head = node
         else:
@@ -83,16 +112,16 @@ def foo2(node1,node2):
             node2 = node2.next
         node = Node(carry%10,None)
         carry = carry/10
-        
+
         if node3 == None:
             node3 = node
         else:
             pre.next = node
         pre = node
     return node3
-    
+
 if __name__ == '__main__':
-    
+
     print '\nTest case 1: 4 -> 2 -> 3-> 4 -> 8 -> 6'
     node6 = Node(6,None)
     node5 = Node(8,node6)
@@ -104,10 +133,4 @@ if __name__ == '__main__':
     print node6
     print foo(node4,node6)
     print foo2(node4,node6)
-    
-    
-    
-    
-    
-    
-    
+    print foo3(node4,node6)
