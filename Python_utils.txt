@@ -16,7 +16,10 @@
 	del lst[i:j]
 	del lst[:]
 2) String
-  convert int to string: str(1)
+  ord('#')
+  str(1)
+  chr(100)
+  len('ss')
 	# See: https://docs.python.org/2/library/stdtypes.html#string-methods
 	print r'C:\some\name' # use raw string
 	print 'hi\
@@ -25,8 +28,7 @@
 	print a[2:100] # out of range slice indexes are handled gracefully
 	print ''.join(['h','i'])
 	' '.join(str(x) for x in lst)
-	print ord('a')
-	print '1 2'.split()
+	'1 2'.split()
 	'abc'[::-1] # reverse a string
 	''.join(sorted(a)) # sort a string
 	string += another_string
