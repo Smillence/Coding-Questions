@@ -5,3 +5,15 @@
 end up with setting head.next so the list will alway be of size 2
 5. forloop does not work for linked list
 6. linked list questions usually need two variables: head and cur
+7. [0 for x in range(256)] should be [0 for _ in range(256)]
+8. if/else unnecessary nesting
+if ...:
+    return False
+else xxx:
+    do_sth()
+
+should be
+
+if ...:
+    return False
+do_sth()
