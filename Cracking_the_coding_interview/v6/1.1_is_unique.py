@@ -91,7 +91,7 @@ class TestIsUnique(unittest.TestCase):
                 self.assertEqual(
                     output,
                     expected,
-                    func.__name__ + "('" + input + "') output: " + str(output) + '. Expect: '+ str(expected),
+                    "%s('%s') output: %r. Expect: %r" % (func.__name__, input, output, expected),
                 )
 
 if __name__ == '__main__':
