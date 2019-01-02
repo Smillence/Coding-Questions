@@ -26,7 +26,7 @@
 	yourself'
 	a = 'Py' 'thon'
 	print a[2:100] # out of range slice indexes are handled gracefully
-	print ''.join(['h','i'])
+	''.join(['h','i'])
 	' '.join(str(x) for x in lst)
 	'1 2'.split()
 	'abc'[::-1] # reverse a string
