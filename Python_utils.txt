@@ -33,7 +33,7 @@
 	''.join(sorted(a)) # sort a string
 	string += another_string
 4) if __name__ == '__main__':
-5)
+5) bitwise operators: x<<y, x>>y, x&y, x|y, ~x, x^y
 6) for i in range(len(lst)-1,-1,-1):
 7) {char:[] for char in Set}
 8) min(lst, key=foo)
@@ -69,3 +69,4 @@ except:
 20) eval("x + 3")
 21) any(lst)
     all(lst)
+22) import unittest

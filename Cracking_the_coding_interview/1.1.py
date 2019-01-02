@@ -14,7 +14,7 @@ Examples:
 1) agshdhfkd -> False
 2) agsdhfk -> True
 '''
-
+import unittest
 
 # Solution: hash table
 # time: O(n)
@@ -56,47 +56,34 @@ def is_unique_3(string):
             checker |= 1 << pos
     return True
 
-''' Below are Unit Tests '''
+class TestIsUnique(unittest.TestCase):
+    def data_provider(self):
+        return [
+            ('', True),
+            ('a', True),
+            ('~~', False),
+            ('agshdhfkd', False),
+            ('agsdhfk', True),
+            ('agsdhfkA123BGW', True),
+            ('agsdhfkA123BGW278', False),
+        ];
 
-def unit_test_1(func):
-    input_string = 'agshdhfkd'
-    expected = False
-    if func(input_string) == expected:
-        print "Pass: Unit Test 1"
-    else:
-        print "Fail: Unit Test 1"
+    def func_provider(self):
+        return [
+            is_unique_1,
+            is_unique_2,
+            is_unique_3,
+        ];
 
-def unit_test_2(func):
-    input_string = 'agsdhfk'
-    expected = True
-    if func(input_string) == expected:
-        print "Pass: Unit Test 2"
-    else:
-        print "Fail: Unit Test 2"
-
-def unit_test_3(func):
-    input_string = 'agsdhfkA123BGW'
-    expected = True
-    if func(input_string) == expected:
-        print "Pass: Unit Test 3"
-    else:
-        print "Fail: Unit Test 3"
-
-def unit_test_4(func):
-    input_string = 'agsdhfkA123BGW278'
-    expected = False
-    if func(input_string) == expected:
-        print "Pass: Unit Test 4"
-    else:
-        print "Fail: Unit Test 4"
-
-def run_unit_tests(func):
-    unit_test_1(func)
-    unit_test_2(func)
-    unit_test_3(func)
-    unit_test_4(func)
+    def test(self):
+        for func in self.func_provider():
+            for input, expected in self.data_provider():
+                output = func(input)
+                self.assertEqual(
+                    output,
+                    expected,
+                    func.__name__ + "('" + input + "') output: " + str(output) + '. Expect: '+ str(expected),
+                )
 
 if __name__ == '__main__':
-    run_unit_tests(is_unique_1)
-    run_unit_tests(is_unique_2)
-    run_unit_tests(is_unique_3)
+    unittest.main()
