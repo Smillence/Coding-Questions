@@ -20,6 +20,9 @@ import unittest
 # time: O(n)
 # space: O(1) - Note: there are only 256 characters
 def is_unique_1(string):
+    if len(string) > 256:
+        return False
+
     s = set()
     for char in string:
         if char in s:
@@ -32,14 +35,17 @@ def is_unique_1(string):
 # time: O(n)
 # space: O(1)
 def is_unique_2(string):
-    table = [0 for x in range(256)]
+    if len(string) > 256:
+        return False
+
+    char_set = [False for _ in range(256)]
     for char in string:
         # returns the integer ordinal of a character
         index = ord(char)
-        if table[index] == 0:
-            table[index] = 1
-        else:
+        if char_set[index]:
             return False
+        else:
+            char_set[index] = True
     return True
 
 # Solution: bit vector
@@ -47,6 +53,9 @@ def is_unique_2(string):
 # time: O(n)
 # space: O(1)
 def is_unique_3(string):
+    if len(string) > 256:
+        return False
+
     checker = 0
     for char in string:
         pos = ord(char)
