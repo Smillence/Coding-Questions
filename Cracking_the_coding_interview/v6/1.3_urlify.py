@@ -48,7 +48,7 @@ def is_space(c):
 def char_array_2_str(char_array):
     return ''.join(char_array)
 
-class TestCheckPermutation(unittest.TestCase):
+class TestUrlify(unittest.TestCase):
     def data_provider(self):
         return [
             ('Mr John Smith$#%^', 13, 'Mr%20John%20Smith'),

@@ -17,3 +17,5 @@ should be
 if ...:
     return False
 do_sth()
+9. checker >> 1 does not change a. it should be checker >>= 1.
+example: 1.4 palindrome_permutation_2
