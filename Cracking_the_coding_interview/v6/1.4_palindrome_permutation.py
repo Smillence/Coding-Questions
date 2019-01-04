@@ -38,9 +38,9 @@ def palindrome_permutation_2(s):
             if has_odd_num_char:
                 return False
             has_odd_num_char = True
+        # Hot spot: it's wrong to write: checker >> 1. need to use >>=
         checker >>= 1
     return True
-
 
 class TestPalindromePermutation(unittest.TestCase):
     def data_provider(self):
