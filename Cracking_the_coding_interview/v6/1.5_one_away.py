@@ -51,6 +51,9 @@ def one_away_1(s1, s2):
         return True
     return False
 
+def one_away_2(s1, s2):
+    pass
+
 class TestOneAway(unittest.TestCase):
     def data_provider(self):
         return [

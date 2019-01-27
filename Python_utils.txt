@@ -27,11 +27,16 @@
 	a = 'Py' 'thon'
 	print a[2:100] # out of range slice indexes are handled gracefully
 	''.join(['h','i'])
-	' '.join(str(x) for x in lst)
+	''.join(str(x) for x in lst)
 	'1 2'.split()
 	'abc'[::-1] # reverse a string
-	''.join(sorted(a)) # sort a string
-	string += another_string
+	''.join(sorted(a))
+	s1 += s2
+	zip(s1,s2)
+	from string import printable
+	s.encode('hex')
+	"%x" % 123
+3) 
 4) if __name__ == '__main__':
 5) bitwise operators: x<<y, x>>y, x&y, x|y, ~x, x^y
 6) for i in range(len(lst)-1,-1,-1):
@@ -42,7 +47,7 @@
 11) lst = filter(lambda item: item != '', lst)
 12) lst = map(lambda x:int(x),lst)
     value = reduce(lambda x, y : x + y, [1,2,3])
-13)
+13) int('5f',16)
 14) import re
     pattern = re.compile(r'\s+')
  	  string = re.sub(pattern, '', string)
@@ -60,9 +65,9 @@ except:
 	  queue = deque([1,2,3])
 	  queue.append(4)
 	  queue.popleft() # FIFO
-17) from collections import Counter
+    from collections import Counter
     a=Counter('aabc')
-17) from collections import defaultdict
+    from collections import defaultdict
     dic = defaultdict(int)
 18) integer division: a // b
 19) from fractions import Fraction
