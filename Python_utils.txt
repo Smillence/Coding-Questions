@@ -36,6 +36,7 @@
 	from string import printable
 	s.encode('hex')
 	"%x" % 123
+	list('abc')
 3) 
 4) if __name__ == '__main__':
 5) bitwise operators: x<<y, x>>y, x&y, x|y, ~x, x^y

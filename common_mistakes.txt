@@ -22,3 +22,8 @@ example: 1.4 palindrome_permutation_2
 10. always test hot spots such as empty string as input
 example: 1.5 one_away_1 at line 36, it's essential to check j < len(s_shorter)
 because the shorter string can be empty string
+11. for i in len(xxx)
+- this should be for i in range(len(xxx))
+12. 'header'.join(['a', 'b'])
+- this does not produce: 'headerab', instead it will output 'aheaderb'
+- the right way to do it is: 'header' + ''.join(['a', 'b'])
