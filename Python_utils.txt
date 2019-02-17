@@ -1,6 +1,4 @@
 1) List
-  len(lst)
-	lst[-1]
   lst1 + lst2
   cmp(list1, list2)
 	sorted(lst)
@@ -16,27 +14,22 @@
 	del lst[i:j]
 	del lst[:]
 2) String
-  ord('#')
-  str(1)
-  chr(100)
-  len('ss')
 	# See: https://docs.python.org/2/library/stdtypes.html#string-methods
 	print r'C:\some\name' # use raw string
 	print 'hi\
 	yourself'
 	a = 'Py' 'thon'
-	print a[2:100] # out of range slice indexes are handled gracefully
+	s='a' s[1:] # out of range slice indexes are handled gracefully
 	''.join(['h','i'])
 	''.join(str(x) for x in lst)
-	'1 2'.split()
+	'1 2'.split() # default to split on space
 	'abc'[::-1] # reverse a string
-	''.join(sorted(a))
-	s1 += s2
-	zip(s1,s2)
+	'abcde'[3:0:-1] # 'dcb', s[start:end:step]
+	list('abc')
+	for c1, c2 in zip(s1,s2)
 	from string import printable
 	s.encode('hex')
 	"%x" % 123
-	list('abc')
 3) 
 4) if __name__ == '__main__':
 5) bitwise operators: x<<y, x>>y, x&y, x|y, ~x, x^y
