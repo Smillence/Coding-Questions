@@ -93,13 +93,14 @@ def one_away_3(s1, s2):
 ''' 
 pre-requisite: len(s1) <= len(s2)
 Note: this solution is more elegant comparing to one_away_2_helper because it
-does not need to compare dist with 0 or 1 before the for-loop
+does not need to compare dist with 0 or 1 before the for-loop. It does all three
+checks in a single pass.
 ''' 
 def one_away_3_helper(s1, s2):
     dist = len(s2) - len(s1)
 
-    if s1 == '': # Hot spot 3: w/o this special case, it will fail test case ('', 'ab')
-        return dist <= 1
+    if dist > 1: # Hot spot 3: w/o this special case, it will fail test case ('', 'ab')
+        return False
 
     for i in range(len(s1)):
         if s1[i] == s2[i]:
@@ -108,6 +109,7 @@ def one_away_3_helper(s1, s2):
         pos = i+1 if dist == 0 else i
         return s1[pos:] == s2[i+1:]
  
+    # Hot spot 4: case ('pal', 'palks') can be missed easily
     return True
 
 class TestOneAway(unittest.TestCase):
@@ -116,14 +118,28 @@ class TestOneAway(unittest.TestCase):
             ('', '', True),
             ('a', 'a', True),
             ('a', '', True),
+            ('', 'a', True),
             ('a', 'b', True),
+            ('a', 'ab', True),
             ('ab', 'ba', False),
             ('ab', '', False),
+            ('pale', 'pale', True),
             ('pale', 'ple', True),
+            ('ple', 'pale', True),
+            ('pale', 'ble', False),
+            ('pale', 'pas', False),
+            ('pas', 'pale', False),
             ('pabe', 'ple', False),
+            ('pale', 'pse', False),
             ('pales', 'pale', True),
+            ('ples', 'pales', True),
             ('pale', 'bale', True),
+            ('pale', 'pkle', True),
+            ('pkle', 'pable', False),
+            ('pal', 'palks', False),
+            ('palks', 'pal', False),
             ('pale', 'bake', False),
+            ('paleabc', 'pleabc', True),
         ]
 
     def func_provider(self):
