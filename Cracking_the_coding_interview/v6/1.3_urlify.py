@@ -59,6 +59,8 @@ class TestUrlify(unittest.TestCase):
             (' %^', 1, '%20'),
             ('Ha$#%^&*', 2, 'Ha$#%^&*'),
             ('Ha ha$#%^&*', 5, 'Ha%20ha%^&*'),
+            ('much ado about nothing      ', 22, 'much%20ado%20about%20nothing'),
+            ('Mr John Smith    ', 13, 'Mr%20John%20Smith'),
         ]
 
     def func_provider(self):

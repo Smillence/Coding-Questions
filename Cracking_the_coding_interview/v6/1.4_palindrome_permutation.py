@@ -54,6 +54,11 @@ class TestPalindromePermutation(unittest.TestCase):
             ('tactcoa', True),
             ('ab', False),
             ('aabc', False),
+            ('jhsabckuj  ahjsbckj', True),
+            ('able was I ere I saw elba', True),
+            ('so patient a nurse to nurse a patient so', False),
+            ('not a palindrome', False),
+            ('no x in nixon', True),
         ]
 
     def func_provider(self):

@@ -34,11 +34,17 @@ class TestCheckPermutation(unittest.TestCase):
             ('ab', 'ba', True),
             ('aab', 'aba', True),
             ('aabc', 'baca', True),
+            ('abcd', 'bacd', True),
+            ('3563476', '7334566', True),
+            ('wef34f', 'wffe34', True),
             ('a', '', False),
             ('aa', 'a', False),
             ('ab', 'ac', False),
             ('aabc', 'bacb', False),
             ('aabc', 'bacd', False),
+            ('abcd', 'd2cba', False),
+            ('2354', '1234', False),
+            ('dcw4f', 'dcw5f', False),
         ]
 
     def func_provider(self):

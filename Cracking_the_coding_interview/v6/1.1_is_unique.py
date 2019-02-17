@@ -75,6 +75,8 @@ class TestIsUnique(unittest.TestCase):
             ('agsdhfk', True),
             ('agsdhfkA123BGW', True),
             ('agsdhfkA123BGW278', False),
+            ('23ds2', False),
+            ('hb 627jh=j ()', False),
         ];
 
     def func_provider(self):
