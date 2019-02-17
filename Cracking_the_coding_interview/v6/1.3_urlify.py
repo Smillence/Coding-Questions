@@ -5,7 +5,7 @@ and that you are given the "true" length of the string. (Note: If implementing
 in Java, please use a character array so that you can perform this operation in
 place.)
 EXAMPLE
-Input:  "Mr John Smith    ", 13
+Input:  "Mr John Smith  ", 13
 Output: "Mr%20John%20Smith"
 Hints: #53, #118
 
@@ -27,61 +27,61 @@ REPLACER = '%20'
 # time: O(n)
 # space: O(1)
 def urlify(char_array, n):
-    num_of_spaces = 0
-    for i in range(n):
-        if is_space(char_array[i]):
-            num_of_spaces += 1
+  num_of_spaces = 0
+  for i in range(n):
+    if is_space(char_array[i]):
+      num_of_spaces += 1
 
-    cursor = num_of_spaces * (len(REPLACER) - 1) + (n - 1)
-    for i in range(n - 1, -1, -1):
-        if is_space(char_array[i]):
-            char_array[cursor - len(REPLACER) + 1 : cursor + 1] = list(REPLACER)
-            cursor -= len(REPLACER)
-        else:
-            char_array[cursor] = char_array[i]
-            cursor -= 1
-    return char_array
+  cursor = num_of_spaces * (len(REPLACER) - 1) + (n - 1)
+  for i in range(n - 1, -1, -1):
+    if is_space(char_array[i]):
+      char_array[cursor - len(REPLACER) + 1 : cursor + 1] = list(REPLACER)
+      cursor -= len(REPLACER)
+    else:
+      char_array[cursor] = char_array[i]
+      cursor -= 1
+  return char_array
 
 def is_space(c):
-    return c == ' '
+  return c == ' '
 
 def char_array_2_str(char_array):
-    return ''.join(char_array)
+  return ''.join(char_array)
 
 class TestUrlify(unittest.TestCase):
-    def data_provider(self):
-        return [
-            ('Mr John Smith$#%^', 13, 'Mr%20John%20Smith'),
-            ('Mr John Smith $#%^&*', 14, 'Mr%20John%20Smith%20'),
-            ('', 0, ''),
-            ('a', 0, 'a'),
-            ('a', 1, 'a'),
-            (' %^', 1, '%20'),
-            ('Ha$#%^&*', 2, 'Ha$#%^&*'),
-            ('Ha ha$#%^&*', 5, 'Ha%20ha%^&*'),
-            ('much ado about nothing      ', 22, 'much%20ado%20about%20nothing'),
-            ('Mr John Smith    ', 13, 'Mr%20John%20Smith'),
-        ]
+  def data_provider(self):
+    return [
+      ('Mr John Smith$#%^', 13, 'Mr%20John%20Smith'),
+      ('Mr John Smith $#%^&*', 14, 'Mr%20John%20Smith%20'),
+      ('', 0, ''),
+      ('a', 0, 'a'),
+      ('a', 1, 'a'),
+      (' %^', 1, '%20'),
+      ('Ha$#%^&*', 2, 'Ha$#%^&*'),
+      ('Ha ha$#%^&*', 5, 'Ha%20ha%^&*'),
+      ('much ado about nothing      ', 22, 'much%20ado%20about%20nothing'),
+      ('Mr John Smith    ', 13, 'Mr%20John%20Smith'),
+    ]
 
-    def func_provider(self):
-        return [
-            urlify,
-        ]
+  def func_provider(self):
+    return [
+      urlify,
+    ]
 
-    def test(self):
-        for func in self.func_provider():
-            for data in self.data_provider():
-                s, n, expected = data
-                self.assertEqual(len(s), len(expected), func.__name__ + '() case: ' + str(data) + ' corrupted')
+  def test(self):
+    for func in self.func_provider():
+      for data in self.data_provider():
+        s, n, expected = data
+        self.assertEqual(len(s), len(expected), func.__name__ + '() case: ' + str(data) + ' corrupted')
 
-                err_msg = func.__name__ + '() case: ' + str(data) + ' failed'
+        err_msg = func.__name__ + '() case: ' + str(data) + ' failed'
 
-                char_array = list(s)
-                output = func(char_array, n)
-                self.assertEqual(char_array, output, err_msg)
+        char_array = list(s)
+        output = func(char_array, n)
+        self.assertEqual(char_array, output, err_msg)
 
-                output_2_str = char_array_2_str(output)
-                self.assertEqual(output_2_str, expected, err_msg)
+        output_2_str = char_array_2_str(output)
+        self.assertEqual(output_2_str, expected, err_msg)
 
 if __name__ == '__main__':
-    unittest.main()
+  unittest.main()
