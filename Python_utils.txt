@@ -35,7 +35,7 @@
 5) bitwise operators: x<<y, x>>y, x&y, x|y, ~x, x^y
 6) for i in range(len(lst)-1,-1,-1):
 7) {char:[] for char in Set}
-8) min(lst, key=foo)
+8) min(lst, key=foo); min(string_1, string2, len)
 9) min(result_l,result_r,key=lambda x:x[0])
 10) lst = [[k,v] for k,v in dic.items()]
 11) lst = filter(lambda item: item != '', lst)
