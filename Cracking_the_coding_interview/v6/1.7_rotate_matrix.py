@@ -31,7 +31,7 @@ def rotate_matrix(matrix):
       matrix[n - 1 - i][n - 1 - j] = matrix[j][n - 1 - i]
       matrix[j][n - 1 - i] = tmp
 
-class TestStrComp(UnitTestBase, unittest.TestCase):
+class Test(UnitTestBase, unittest.TestCase):
   def data_provider(self):
     return [
       ([], []),
