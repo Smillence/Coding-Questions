@@ -26,3 +26,6 @@ example: 1.5 one_away_1 at Hot Spot 1 & 2
 12. 'header'.join(['a', 'b'])
 - this does not produce: 'headerab', instead it will output 'aheaderb'
 - the right way to do it is: 'header' + ''.join(['a', 'b'])
+13. while len(lst) > 0:
+      data = lst.pop()
+    this will have side effect on the list. not recommended for looping a list

@@ -26,7 +26,7 @@ class UnitTestBase(ABC):
 
   def expect(self, result, func, data):
     expected = data[1]
-    self.assertEqual(result, expected, self.err_msg(func, data))
+    self.assertEqual(str(result), str(expected), self.err_msg(func, data))
 
   def err_msg(self, func, data):
     return  'Failed \'' + func.__name__ + '\'. args & expected: ' + str(data)
