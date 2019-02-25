@@ -21,3 +21,10 @@ class LinkedList():
       res.append(cur.data)
       cur = cur.next
     return str(res)
+
+  def get(self, index):
+    node = self.head
+    for _ in range(index):
+      node = node.next
+    return node
+
