@@ -12,7 +12,7 @@ Result: nothing is returned, but the new linked list looks like a->b->d->e->f
 import copy
 import unittest
 from test_utils import UnitTestBase
-from data_structure import Node, LinkedList as LL
+from data_structure import LinkedList as LL
 
 # Time: O(1)
 # Space: O(1)

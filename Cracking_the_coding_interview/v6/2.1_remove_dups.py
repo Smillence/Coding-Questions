@@ -14,7 +14,7 @@ clarification:
 
 import unittest
 from test_utils import UnitTestBase
-from data_structure import Node, LinkedList as LL
+from data_structure import LinkedList as LL
 
 # Solution: use hash table
 # Time: O(n)
