@@ -40,9 +40,7 @@ def sum_lists_1(ll1, ll2):
 # Space: O(Max(M, N))
 def sum_lists_2(ll1, ll2):
   head = sum_lists_2_helper(ll1.head, ll2.head, 0)
-  ll = LL([])
-  ll.head = head
-  return ll
+  return LL(head)
 
 def sum_lists_2_helper(node1, node2, carry):
   if node1 == None and node2 == None and carry == 0:
@@ -64,17 +62,21 @@ def sum_lists_2_helper(node1, node2, carry):
   return Node(value, next)
 
 # assume ll1 and ll2 has at least 1 node
+# Time: O(M + N)
+# Space: O(Max(M, N))
 def sum_lists_follow_up(ll1, ll2):
+  # modify two lists to be the same length
   len1, len2 = ll1.length(), ll2.length()
   head1, head2 = ll1.head, ll2.head
   if len1 < len2:
     head1 = append_zero_nodes(head1, len2 - len1)
   elif len1 > len2:
     head2 = append_zero_nodes(head2, len1 - len2)
-  head = sum_lists_follow_up_helper(head1, head2)
-  ll = LL([])
-  ll.head = head
-  return ll
+
+  (head, carry) = sum_lists_follow_up_helper(head1, head2)
+  if carry != 0:
+    head = Node(carry, head)
+  return LL(head)
 
 # input: n must be positive integer
 def append_zero_nodes(node, num):
@@ -85,8 +87,18 @@ def append_zero_nodes(node, num):
   pt.next = node
   return head
 
+# two lists should be the same length
 def sum_lists_follow_up_helper(node1, node2):
-  pass
+  if node1 == None:
+    return (None, 0)
+
+  node, carry = sum_lists_follow_up_helper(node1.next, node2.next)
+
+  tmp = node1.data + node2.data + carry
+  new_carry, value = tmp // 10, tmp % 10
+  head = Node(value, node)
+
+  return (head, new_carry)
 
 class Test(UnitTestBase, unittest.TestCase):
   def data_provider(self):
@@ -108,23 +120,24 @@ class Test(UnitTestBase, unittest.TestCase):
     ll1, ll2 = args
     return func(ll1, ll2)
 
-# class TestFollowUp(UnitTestBase, unittest.TestCase):
-#   def data_provider(self):
-#     return [
-#       ((LL([1]), LL([1])), LL([2])),
-#       ((LL([1]), LL([9])), LL([1, 0])),
-#       ((LL([6, 1, 7]), LL([2, 9, 5])), LL([9, 1, 2])),
-#       ((LL([1]), LL([9, 9, 9])), LL([1, 0, 0, 0])),
-#     ]
+class TestFollowUp(UnitTestBase, unittest.TestCase):
+  def data_provider(self):
+    return [
+      ((LL([1]), LL([1])), LL([2])),
+      ((LL([1]), LL([9])), LL([1, 0])),
+      ((LL([6, 1, 7]), LL([2, 9, 5])), LL([9, 1, 2])),
+      ((LL([1]), LL([9, 9, 9])), LL([1, 0, 0, 0])),
+      ((LL([8, 7, 9]), LL([5, 8, 6])), LL([1, 4, 6, 5])),
+    ]
 
-#   def func_provider(self):
-#     return [
-#       sum_lists_follow_up,
-#     ]
+  def func_provider(self):
+    return [
+      sum_lists_follow_up,
+    ]
 
-#   def func_eval(self, func, args):
-#     ll1, ll2 = args
-#     return func(ll1, ll2)
+  def func_eval(self, func, args):
+    ll1, ll2 = args
+    return func(ll1, ll2)
 
 if __name__ == '__main__':
   unittest.main()
