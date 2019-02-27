@@ -19,8 +19,6 @@ from data_structure import Node, LinkedList as LL
 # Time: O(Max(M, N))
 # Space: O(Max(M, N))
 def sum_lists_1(ll1, ll2):
-  ll = LL([])
-
   cur = head = Node(None) # dummy node
   carry, pt1, pt2 = 0, ll1.head, ll2.head
   while pt1 != None or pt2 != None or carry != 0:
@@ -35,8 +33,7 @@ def sum_lists_1(ll1, ll2):
     cur.next = Node(value)
     cur = cur.next
 
-  ll.head = head.next
-  return ll
+  return LL(head.next)
 
 # Solution: use recursion
 # Time: O(Max(M, N))
@@ -66,8 +63,29 @@ def sum_lists_2_helper(node1, node2, carry):
   )
   return Node(value, next)
 
-
+# assume ll1 and ll2 has at least 1 node
 def sum_lists_follow_up(ll1, ll2):
+  len1, len2 = ll1.length(), ll2.length()
+  head1, head2 = ll1.head, ll2.head
+  if len1 < len2:
+    head1 = append_zero_nodes(head1, len2 - len1)
+  elif len1 > len2:
+    head2 = append_zero_nodes(head2, len1 - len2)
+  head = sum_lists_follow_up_helper(head1, head2)
+  ll = LL([])
+  ll.head = head
+  return ll
+
+# input: n must be positive integer
+def append_zero_nodes(node, num):
+  pt = head = Node(0)
+  for _ in range(num - 1):
+    pt.next = Node(0)
+    pt = pt.next
+  pt.next = node
+  return head
+
+def sum_lists_follow_up_helper(node1, node2):
   pass
 
 class Test(UnitTestBase, unittest.TestCase):
@@ -89,6 +107,24 @@ class Test(UnitTestBase, unittest.TestCase):
   def func_eval(self, func, args):
     ll1, ll2 = args
     return func(ll1, ll2)
+
+# class TestFollowUp(UnitTestBase, unittest.TestCase):
+#   def data_provider(self):
+#     return [
+#       ((LL([1]), LL([1])), LL([2])),
+#       ((LL([1]), LL([9])), LL([1, 0])),
+#       ((LL([6, 1, 7]), LL([2, 9, 5])), LL([9, 1, 2])),
+#       ((LL([1]), LL([9, 9, 9])), LL([1, 0, 0, 0])),
+#     ]
+
+#   def func_provider(self):
+#     return [
+#       sum_lists_follow_up,
+#     ]
+
+#   def func_eval(self, func, args):
+#     ll1, ll2 = args
+#     return func(ll1, ll2)
 
 if __name__ == '__main__':
   unittest.main()

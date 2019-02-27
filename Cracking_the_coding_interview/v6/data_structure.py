@@ -6,10 +6,14 @@ class Node():
     return str(self.data)
 
 class LinkedList():
-  def __init__(self, lst = []):
+  def __init__(self, args = []):
+    if isinstance(args, Node):
+      self.head = args
+      return
+
     cur = None
-    for i in range(len(lst) - 1, -1, -1):
-      data = lst[i]
+    for i in range(len(args) - 1, -1, -1):
+      data = args[i]
       n = Node(data, cur)
       cur = n
     self.head = cur
@@ -27,4 +31,11 @@ class LinkedList():
     for _ in range(index):
       node = node.next
     return node
+
+  def length(self):
+    length, pt = 0, self.head
+    while pt != None:
+      pt = pt.next
+      length += 1
+    return length
 
