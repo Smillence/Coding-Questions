@@ -18,7 +18,7 @@ from data_structure import Node, LinkedList as LL
 
 # Time: O(Max(M, N))
 # Space: O(Max(M, N))
-def sum_lists(ll1, ll2):
+def sum_lists_1(ll1, ll2):
   ll = LL([])
 
   cur = head = Node(None) # dummy node
@@ -38,6 +38,38 @@ def sum_lists(ll1, ll2):
   ll.head = head.next
   return ll
 
+# Solution: use recursion
+# Time: O(Max(M, N))
+# Space: O(Max(M, N))
+def sum_lists_2(ll1, ll2):
+  head = sum_lists_2_helper(ll1.head, ll2.head, 0)
+  ll = LL([])
+  ll.head = head
+  return ll
+
+def sum_lists_2_helper(node1, node2, carry):
+  if node1 == None and node2 == None and carry == 0:
+    return None
+
+  tmp = carry
+  if node1 != None:
+    tmp += node1.data
+  if node2 != None:
+    tmp += node2.data
+
+  new_carry, value = tmp // 10, tmp % 10
+
+  next = sum_lists_2_helper(
+    node1.next if node1 != None else None,
+    node2.next if node2 != None else None,
+    new_carry,
+  )
+  return Node(value, next)
+
+
+def sum_lists_follow_up(ll1, ll2):
+  pass
+
 class Test(UnitTestBase, unittest.TestCase):
   def data_provider(self):
     return [
@@ -45,11 +77,13 @@ class Test(UnitTestBase, unittest.TestCase):
       ((LL([1]), LL([9])), LL([0, 1])),
       ((LL([7, 1, 6]), LL([5, 9, 2])), LL([2, 1, 9])),
       ((LL([1]), LL([9, 9, 9])), LL([0, 0, 0, 1])),
+      ((LL([9, 7, 8]), LL([6, 8, 5])), LL([5, 6, 4, 1])),
     ]
 
   def func_provider(self):
     return [
-      sum_lists,
+      sum_lists_1,
+      sum_lists_2,
     ]
 
   def func_eval(self, func, args):
